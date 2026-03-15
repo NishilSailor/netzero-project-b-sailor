@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BSMW Insurance — Kingston, Ontario</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">BSM<span>W</span></a>
+  <nav>
+    <a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a>
+    <a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a>
+    <a href="/services" class="<%= page === 'services' ? 'active' : '' %>">Services</a>
+    <a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a>
+    <a href="/quote" class="<%= page === 'quote' ? 'active' : '' %>">Get a Quote</a>
+  </nav>
+</header>

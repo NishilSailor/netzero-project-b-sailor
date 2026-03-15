@@ -1,0 +1,63 @@
+<%- include('partials/header', { page: 'quote' }) %>
+
+<div class="page-header">
+  <h1>Get a Free Quote</h1>
+  <p>Fill out the form below and one of our brokers will be in touch shortly.</p>
+</div>
+
+<div class="section">
+  <div class="form-wrapper">
+
+    <% if (success) { %>
+      <div class="alert alert-success">
+        ✅ Your quote request has been submitted! A broker will reach out to you within one business day.
+      </div>
+    <% } %>
+
+    <% if (error) { %>
+      <div class="alert alert-error">
+        ❌ Something went wrong. Please try again or call us at (613) 887-2625.
+      </div>
+    <% } %>
+
+    <form action="/quote" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Smith" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="jane@email.com" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="613-555-0100" />
+        </div>
+        <div class="form-group">
+          <label for="insurance_type">Type of Insurance *</label>
+          <select id="insurance_type" name="insurance_type" required>
+            <option value="" disabled selected>Select a type...</option>
+            <option value="Home Insurance">Home Insurance</option>
+            <option value="Auto Insurance">Auto Insurance</option>
+            <option value="Commercial Insurance">Commercial Insurance</option>
+            <option value="Union Insurance">Union Insurance</option>
+            <option value="Other">Other / Not Sure</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="details">Tell Us a Bit More</label>
+        <textarea id="details" name="details" placeholder="E.g. I'm looking for home insurance on a new property in Kingston..."></textarea>
+      </div>
+
+      <button type="submit" class="btn" style="width: 100%; padding: 16px;">Submit Quote Request</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
