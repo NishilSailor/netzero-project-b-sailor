@@ -1,0 +1,89 @@
+<%- include('../partials/header', { page: '' }) %>
+
+<div class="page-header">
+  <h1>Welcome, <%= client.name %></h1>
+  <p>Your personal insurance portal. &nbsp;<a href="/client/logout" style="color:#c8973a;">Log Out</a></p>
+</div>
+
+<div class="section">
+
+  <%# RENEWAL ALERT %>
+  <%
+    const today = new Date();
+    const soonPolicies = policies.filter(p => {
+      const renewal = new Date(p.renewal_date);
+      const diff = (renewal - today) / (1000 * 60 * 60 * 24);
+      return diff >= 0 && diff <= 30;
+    });
+  %>
+  <% if (soonPolicies.length > 0) { %>
+    <div style="background:#fff3cd; border-left:4px solid #c8973a; border-radius:6px; padding:18px 22px; margin-bottom:30px;">
+      <strong style="color:#856404;">⚠️ Upcoming Renewal</strong>
+      <% soonPolicies.forEach(p => { %>
+        <p style="margin:6px 0 0; color:#856404; font-size:0.95rem;">
+          Your <strong><%= p.policy_type %></strong> policy renews on
+          <strong><%= new Date(p.renewal_date).toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' }) %></strong>.
+          Contact your broker if you have any questions.
+        </p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <%# POLICIES %>
+  <div class="divider"></div>
+  <h2 class="section-title">Your Active Policies</h2>
+  <p class="section-sub">All your current coverage in one place.</p>
+
+  <div class="cards" style="margin-bottom:50px;">
+    <% if (policies.length === 0) { %>
+      <p style="color:#999;">No policies on file yet. Contact your broker for more information.</p>
+    <% } %>
+    <% policies.forEach(p => { %>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3><%= p.policy_type %></h3>
+        <p><strong>Insurer:</strong> <%= p.insurer %></p>
+        <p><strong>Premium:</strong> $<%= parseFloat(p.premium).toFixed(2) %>/yr</p>
+        <p><strong>Renewal:</strong> <%= new Date(p.renewal_date).toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' }) %></p>
+        <p style="margin-top:10px;">
+          <span style="background:<%= p.status === 'ACTIVE' ? '#d4edda' : '#f8d7da' %>; color:<%= p.status === 'ACTIVE' ? '#155724' : '#721c24' %>; padding:3px 10px; border-radius:20px; font-size:0.8rem; font-weight:600;">
+            <%= p.status %>
+          </span>
+        </p>
+      </div>
+    <% }) %>
+  </div>
+
+  <%# MESSAGES %>
+  <div class="divider"></div>
+  <h2 class="section-title">Messages</h2>
+  <p class="section-sub">Your conversation with your broker.</p>
+
+  <% if (messages.length === 0) { %>
+    <p style="color:#999; margin-bottom:30px;">No messages yet.</p>
+  <% } %>
+
+  <% messages.forEach(m => { %>
+    <div style="background:white; border-radius:8px; padding:20px 25px; margin-bottom:15px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid #c8973a;">
+      <p style="font-size:0.8rem; color:#999; margin-bottom:8px;">
+        <%= m.broker_name %> &nbsp;·&nbsp; <%= new Date(m.sent_at).toLocaleString() %>
+      </p>
+      <p style="color:#333; line-height:1.6;"><%= m.body %></p>
+    </div>
+  <% }) %>
+
+  <%# MESSAGE FORM %>
+  <div style="background:white; border-radius:8px; padding:30px; margin-top:30px; box-shadow:0 2px 15px rgba(0,0,0,0.07);">
+    <h3 style="color:#1a2e4a; margin-bottom:6px;">Send a Message to Your Broker</h3>
+    <p style="color:#999; font-size:0.85rem; margin-bottom:20px;">We typically respond within one business day.</p>
+    <form action="/client/message/send" method="POST">
+      <div class="form-group">
+        <textarea name="body" required placeholder="Hi, I have a question about my renewal..." style="width:100%; padding:12px 15px; border:1px solid #ddd; border-radius:4px; height:110px; font-family:inherit; font-size:0.95rem;"></textarea>
+      </div>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>
