@@ -39,7 +39,7 @@ Styling     | Custom CSS (no frameworks)
 Deployment  | Localhost    
 
 
-## Installation
+## Installation (viewing this readme in code preview fixes the formatting issues seen in github)
 
 ### 1. Clone the repository
 git clone https://github.com/NishilSailor/netzero-project-b-sailor.git
@@ -50,6 +50,7 @@ npm install
 (dependencies specific version in package.json as well)
 
 ### 3. Set up the database
+- Requires: PostgreSQL 14 or higher. You can manage the database using pgAdmin, DBeaver, or psql — your choice.
 - Create a PostgreSQL database named `bsmw_portal`
 - Open pgAdmin or psql and run the contents of `database.sql`
 - This will create all tables and insert sample data
@@ -88,7 +89,7 @@ Open your browser and go to: http://localhost:3000
 
 **Client login** — `http://localhost:3000/client/login`
 - Email: `tom@email.com`
-- Password: `client123`
+- Password: `client123` (default)
 
 
 ## Folder Structure
@@ -128,5 +129,3 @@ netzero-project-b-sailor/
 - All credentials are loaded from environment variables — no hardcoded passwords exist in the codebase
 - Run `database.sql` first, then `seed.js`, then `node index.js` in the project folder
 - The app runs on port 3000 by default 
-- A `.gitignore` should be in place to exclude `node_modules/` and `.env`
-
