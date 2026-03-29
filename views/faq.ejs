@@ -1,0 +1,114 @@
+<%- include('partials/header', { page: 'faq' }) %>
+
+<div class="page-header">
+  <h1>Frequently Asked Questions</h1>
+  <p>Answers to the questions we hear most often.</p>
+</div>
+
+<div class="section" style="max-width:800px;">
+
+  <div class="divider"></div>
+  <h2 class="section-title">General Questions</h2>
+  <br/>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      What is an insurance broker and how are you different from an agent?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      An insurance broker works for you, not for any single insurance company. We compare coverage and pricing from multiple insurers to find the best fit for your situation. An agent typically works for one company and can only offer that company's products. At BSMW, we partner with over six top insurers so you always get options.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      How do I get a quote?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      You can submit a quote request through our website and one of our brokers will reach out within one business day. You can also call us directly at (613) 887-2625 or stop by our office at 789 Blackburn Mews, Kingston.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      How much does insurance cost?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      The cost depends on many factors — the type of coverage, your location, your history, the value of what you're insuring, and which insurer we match you with. That's exactly why we shop around for you. Submit a quote request and we'll give you accurate numbers based on your actual situation.
+    </div>
+  </div>
+
+  <br/>
+  <div class="divider"></div>
+  <h2 class="section-title">Home Insurance</h2>
+  <br/>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Is home insurance mandatory in Ontario?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      Home insurance is not legally required in Ontario, but most mortgage lenders will require it before approving your loan. Even if you own outright, going without home insurance is a serious financial risk — a single fire or flood can result in losses worth hundreds of thousands of dollars.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Does home insurance cover flooding?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      Standard home insurance policies cover sudden and accidental water damage (like a burst pipe) but typically do not cover overland flooding. Many insurers now offer overland flood coverage as an add-on. Your BSMW broker can walk you through exactly what your policy covers and recommend additions if you're in a flood-prone area.
+    </div>
+  </div>
+
+  <br/>
+  <div class="divider"></div>
+  <h2 class="section-title">Auto Insurance</h2>
+  <br/>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Is auto insurance mandatory in Ontario?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      Yes. Auto insurance is legally required in Ontario. You must carry at minimum third-party liability coverage of $200,000, direct compensation property damage, uninsured automobile coverage, and accident benefits. Driving without insurance can result in fines and license suspension.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Can I insure multiple vehicles on one policy?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      Yes, and it often saves you money. Bundling multiple vehicles under one policy typically qualifies you for a multi-vehicle discount. Talk to your broker about combining your home and auto policies too — bundling is one of the best ways to reduce your overall premium.
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="text-align:center; padding-top:0;">
+  <p style="color:var(--muted); margin-bottom:20px;">Still have a question? We're happy to help.</p>
+  <a href="/contact" class="btn">Contact Us</a>
+</div>
+
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('open'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+</script>
+
+<%- include('partials/footer') %>

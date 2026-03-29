@@ -8,12 +8,6 @@
 <div class="section">
   <div class="form-wrapper">
 
-    <% if (success) { %>
-      <div class="alert alert-success">
-        ✅ Your quote request has been submitted! A broker will reach out to you within one business day.
-      </div>
-    <% } %>
-
     <% if (error) { %>
       <div class="alert alert-error">
         ❌ Something went wrong. Please try again or call us at (613) 887-2625.
@@ -31,7 +25,6 @@
           <input type="email" id="email" name="email" required placeholder="jane@email.com" />
         </div>
       </div>
-
       <div class="form-row">
         <div class="form-group">
           <label for="phone">Phone Number</label>
@@ -49,13 +42,11 @@
           </select>
         </div>
       </div>
-
       <div class="form-group">
         <label for="details">Tell Us a Bit More</label>
         <textarea id="details" name="details" placeholder="E.g. I'm looking for home insurance on a new property in Kingston..."></textarea>
       </div>
-
-      <button type="submit" class="btn" style="width: 100%; padding: 16px;">Submit Quote Request</button>
+      <button type="submit" class="btn" style="width:100%; padding:16px;">Submit Quote Request</button>
     </form>
   </div>
 </div>

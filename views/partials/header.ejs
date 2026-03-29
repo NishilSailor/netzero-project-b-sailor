@@ -10,12 +10,41 @@
 
 <header>
   <a href="/" class="logo">BSM<span>W</span></a>
+
   <nav>
-  <a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a>
-  <a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a>
-  <a href="/services" class="<%= page === 'services' ? 'active' : '' %>">Services</a>
-  <a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a>
-  <a href="/quote" class="<%= page === 'quote' ? 'active' : '' %>">Get a Quote</a>
-  <a href="/client/login" class="<%= page === 'client' ? 'active' : '' %>">Client Login</a>
-</nav>
+    <a href="/"             class="<%= page === 'home'         ? 'active' : '' %>">Home</a>
+    <a href="/about"        class="<%= page === 'about'        ? 'active' : '' %>">About</a>
+    <a href="/services"     class="<%= page === 'services'     ? 'active' : '' %>">Services</a>
+    <a href="/testimonials" class="<%= page === 'testimonials' ? 'active' : '' %>">Reviews</a>
+    <a href="/faq"          class="<%= page === 'faq'          ? 'active' : '' %>">FAQ</a>
+    <a href="/contact"      class="<%= page === 'contact'      ? 'active' : '' %>">Contact</a>
+    <a href="/client/login" class="<%= page === 'client'       ? 'active' : '' %>">Client Portal</a>
+    <a href="/quote" class="btn btn-sm <%= page === 'quote' ? 'active' : '' %>" style="margin-left:8px;">Get a Quote</a>
+  </nav>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="/"             class="<%= page === 'home'         ? 'active' : '' %>">Home</a>
+  <a href="/about"        class="<%= page === 'about'        ? 'active' : '' %>">About</a>
+  <a href="/services"     class="<%= page === 'services'     ? 'active' : '' %>">Services</a>
+  <a href="/testimonials" class="<%= page === 'testimonials' ? 'active' : '' %>">Reviews</a>
+  <a href="/faq"          class="<%= page === 'faq'          ? 'active' : '' %>">FAQ</a>
+  <a href="/contact"      class="<%= page === 'contact'      ? 'active' : '' %>">Contact</a>
+  <a href="/client/login" class="<%= page === 'client'       ? 'active' : '' %>">Client Portal</a>
+  <a href="/quote"        class="<%= page === 'quote'        ? 'active' : '' %>">Get a Quote</a>
+</div>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+</script>

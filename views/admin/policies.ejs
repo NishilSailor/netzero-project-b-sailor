@@ -1,0 +1,119 @@
+<%- include('../partials/header', { page: '' }) %>
+
+<div class="page-header">
+  <h1>Manage Policies</h1>
+  <p>Admin Panel &nbsp;·&nbsp; <a href="/admin/logout" style="color:var(--gold);">Log Out</a></p>
+</div>
+
+<div class="section">
+
+  <div class="admin-nav-links">
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/policies" class="active">Policies</a>
+    <a href="/admin/brokers">Brokers</a>
+  </div>
+
+  <%# ADD POLICY FORM %>
+  <div class="divider"></div>
+  <h2 class="section-title">Add a Policy</h2>
+  <p class="section-sub">Assign a new policy to an existing client.</p>
+
+  <div style="background:white; border-radius:12px; padding:35px; box-shadow:0 4px 20px rgba(0,0,0,0.07); max-width:700px; margin-bottom:55px;">
+    <form action="/admin/policy/add" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Client</label>
+          <select name="client_id" required>
+            <option value="" disabled selected>Select a client...</option>
+            <% clients.forEach(c => { %>
+              <option value="<%= c.id %>"><%= c.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Policy Type</label>
+          <select name="policy_type" required>
+            <option value="" disabled selected>Select type...</option>
+            <option value="Home Insurance">Home Insurance</option>
+            <option value="Auto Insurance">Auto Insurance</option>
+            <option value="Commercial Property">Commercial Property</option>
+            <option value="Commercial Liability">Commercial Liability</option>
+            <option value="Union Insurance">Union Insurance</option>
+            <option value="Life Insurance">Life Insurance</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Insurer</label>
+          <input type="text" name="insurer" placeholder="e.g. Aviva, RSA, Intact" required />
+        </div>
+        <div class="form-group">
+          <label>Annual Premium ($)</label>
+          <input type="number" name="premium" step="0.01" placeholder="1200.00" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" name="start_date" required />
+        </div>
+        <div class="form-group">
+          <label>Renewal Date</label>
+          <input type="date" name="renewal_date" required />
+        </div>
+      </div>
+      <button type="submit" class="btn">Add Policy</button>
+    </form>
+  </div>
+
+  <%# ALL POLICIES TABLE %>
+  <div class="divider"></div>
+  <h2 class="section-title">All Policies</h2>
+  <p class="section-sub"><%= policies.length %> policies in the system.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Type</th>
+          <th>Insurer</th>
+          <th>Premium</th>
+          <th>Renewal</th>
+          <th>Status</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% policies.forEach(p => { %>
+          <tr>
+            <td><%= p.client_name %></td>
+            <td><%= p.policy_type %></td>
+            <td><%= p.insurer %></td>
+            <td>$<%= parseFloat(p.premium).toFixed(2) %></td>
+            <td><%= new Date(p.renewal_date).toLocaleDateString('en-CA') %></td>
+            <td>
+              <span class="badge <%= p.status === 'ACTIVE' ? 'badge-green' : 'badge-red' %>">
+                <%= p.status %>
+              </span>
+            </td>
+            <td>
+              <form action="/admin/policy/delete" method="POST"
+                onsubmit="return confirm('Delete this policy for <%= p.client_name %>?')">
+                <input type="hidden" name="id" value="<%= p.id %>" />
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+        <% if (policies.length === 0) { %>
+          <tr><td colspan="7" style="text-align:center; color:#999; padding:25px;">No policies yet.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>
